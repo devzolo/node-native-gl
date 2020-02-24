@@ -1,0 +1,14 @@
+{
+  "verbose": true,
+  "ignore": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    ".git",
+    "node_modules"
+  ],
+  "watch": [
+    "src"
+  ],
+  "exec": "yarn start",
+  "ext": "ts"
+}

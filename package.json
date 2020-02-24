@@ -1,0 +1,43 @@
+{
+  "name": "nodejs-napi-project-template",
+  "version": "1.0.0",
+  "main": "dist",
+  "repository": "https://github.com/devzolo/nodejs-napi-project-template.git",
+  "author": "Raphael-ZoLo <zolotorevsky@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.1",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "binary": {
+    "module_name": "nodejs-napi-project-template",
+    "module_path": "./bin/{platform}/{arch}/",
+    "remote_path": "./releases/download/v{version}/",
+    "package_name": "{module_name}-v{version}-{platform}-{arch}.tar.gz",
+    "host": "https://github.com/devzolo/nodejs-napi-project-template"
+  },
+  "scripts": {
+    "install": "node-pre-gyp install --fallback-to-build",
+    "dev": "nodemon",
+    "sources": "deps-source",
+    "start": "ts-node src",
+    "build": "tsc&&node-pre-gyp install --build-from-source",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "node-addon-api": "^2.0.0",
+    "node-pre-gyp": "^0.14.0"
+  }
+}
