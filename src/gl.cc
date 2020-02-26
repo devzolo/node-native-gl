@@ -1330,7 +1330,7 @@ Napi::Value materialfv(const Napi::CallbackInfo& info) {
 
 
 
-	glMaterialfv(face, pname, paramsArr);
+	glMaterialfv(face, pname, paramsArr.Data());
   return env.Undefined();
 }
 
