@@ -11,28 +11,52 @@
   ],
   'targets': [
     {
-      'target_name': 'example',
+      'target_name': 'native-gl',
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
       'sources': [
-        'src/example.cc'
+        'src/gl.cc'
       ],
-      'defines' : ['NAPI_DISABLE_CPP_EXCEPTIONS','UNICODE'],
-      'libraries': [],
+      'defines' : ['GLEW_STATIC','NAPI_DISABLE_CPP_EXCEPTIONS','UNICODE'],
+      'libraries': ['opengl32', 'glew32s'],
       "include_dirs": [
-        "<!@(node -p \"require('node-addon-api').include\")"
+        "<!@(node -p \"require('node-addon-api').include\")",
+        '<(module_root_dir)/deps/glew-2.1.0/include'
       ],
-      'library_dirs' : [],
+      "conditions": [
+        ['OS=="win" and target_arch == "x64"', {
+          'library_dirs' : ['<(module_root_dir)/deps/glew-2.1.0/lib/Release/x64']
+        }]
+      ]
     },
     {
       "target_name": "copy_modules",
       "type":"none",
-      "dependencies" : [ "example" ],
+      "dependencies" : [ "native-gl" ],
       "copies":[
         {
           'destination': '<(module_root_dir)\\bin\\<(platform)\\<(target_arch)',
           'files': [
-            '<(module_root_dir)\\build\\Release\\example.node',
+            '<(module_root_dir)\\build\\Release\\native-gl.node',
+          ]
+        },
+        {
+          'destination': '<(module_root_dir)\\dist',
+          'files': [
+            '<(module_root_dir)\\src\\types\\index.d.ts',
+          ]
+        },
+
+        {
+          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\native-gl\\bin\\<(platform)\\<(target_arch)',
+          'files': [
+            '<(module_root_dir)\\build\\Release\\native-gl.node',
+          ]
+        },
+        {
+          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\native-gl\\dist',
+          'files': [
+            '<(module_root_dir)\\src\\types\\index.d.ts',
           ]
         },
       ]

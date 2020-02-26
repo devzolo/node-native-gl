@@ -1,13 +1,13 @@
 {
-  "name": "nodejs-napi-project-template",
+  "name": "native-gl",
   "version": "1.0.0",
   "main": "dist",
-  "repository": "https://github.com/devzolo/nodejs-napi-project-template.git",
+  "repository": "https://github.com/devzolo/node-native-gl.git",
   "author": "Raphael-ZoLo <zolotorevsky@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^25.1.2",
-    "@types/node": "^13.7.1",
+    "@types/node": "^13.7.4",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
     "@typescript-eslint/parser": "^2.19.0",
     "dotenv": "^8.2.0",
@@ -22,19 +22,21 @@
     "typescript": "^3.7.5"
   },
   "binary": {
-    "module_name": "nodejs-napi-project-template",
+    "module_name": "native-gl",
     "module_path": "./bin/{platform}/{arch}/",
     "remote_path": "./releases/download/v{version}/",
     "package_name": "{module_name}-v{version}-{platform}-{arch}.tar.gz",
-    "host": "https://github.com/devzolo/nodejs-napi-project-template"
+    "host": "https://github.com/devzolo/node-native-gl"
   },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
-    "dev": "nodemon",
+    "build": "node-pre-gyp install --build-from-source",
+    "dist": "tsc",
+    "package": "tsc&&node-pre-gyp install --build-from-source&&jest&&./node_modules/.bin/node-pre-gyp build package",
+    "test": "jest --coverage",
     "sources": "deps-source",
-    "start": "ts-node src",
-    "build": "tsc&&node-pre-gyp install --build-from-source",
-    "test": "jest --coverage"
+    "dev": "nodemon",
+    "start": "ts-node src"
   },
   "dependencies": {
     "node-addon-api": "^2.0.0",

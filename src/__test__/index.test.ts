@@ -1,7 +1,7 @@
-import exemple from "..";
+import GL from "..";
 
-describe('Example Test', () => {
-  it ('exemple.hello() == "world"', () => {
-    expect(exemple.hello()).toEqual('world')
+describe('GL Module Test', () => {
+  it ('VERSION_1_1 == 1', () => {
+    expect(GL.VERSION_1_1).toEqual(1)
   })
 });
