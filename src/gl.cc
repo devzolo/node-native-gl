@@ -41,6 +41,7 @@ if (info.Length() < argc) { \
 #define JS_GLUINT_ARG(pos, name) GLuint name = info[pos].As<Napi::Number>().Uint32Value();
 #define JS_GLINT_ARG(pos, name) GLint name = info[pos].As<Napi::Number>().Int32Value();
 #define JS_GLCLAMPF_ARG(pos, name) GLclampf name = info[pos].As<Napi::Number>().FloatValue();
+#define JS_GLCLAMPD_ARG(pos, name) GLclampd name = info[pos].As<Napi::Number>().DoubleValue();
 #define JS_GLSIZEI_ARG(pos, name) GLsizei name = info[pos].As<Napi::Number>().Int32Value();
 
 #define JS_ARG_TYPE(pos, type)  if (!info[pos].Is##type()) { \
@@ -177,8 +178,12 @@ Napi::Value clearColor(const Napi::CallbackInfo& info) {
 // function clearDepth(depth: GLclampd): void;
 Napi::Value clearDepth(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(clearDepth);
-  return env.Undefined();
+  JS_ARGS(1);
+	JS_ARG_TYPE(0, Number);
+	JS_GLCLAMPD_ARG(0, depth);
+	glClearDepth(depth);
+	return env.Undefined();
+
 }
 
 // function clearIndex(c: GLfloat): void;
@@ -518,7 +523,10 @@ Napi::Value deleteTextures(const Napi::CallbackInfo& info) {
 // function depthFunc(func:GLenum ): void;
 Napi::Value depthFunc(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(depthFunc);
+  JS_ARGS(1);
+	JS_ARG_TYPE(0, Number);
+	JS_GLENUM_ARG(0, func);
+  glDepthFunc(func);
   return env.Undefined();
 }
 
@@ -996,7 +1004,12 @@ Napi::Value getTexParameteriv(const Napi::CallbackInfo& info) {
 // function hint(target:GLenum , mode:GLenum ): void;
 Napi::Value hint(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(hint);
+  JS_ARGS(2);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_GLENUM_ARG(0, target);
+  JS_GLENUM_ARG(1, mode);
+  glHint(target, mode);
   return env.Undefined();
 }
 
@@ -1309,7 +1322,7 @@ Napi::Value materialf(const Napi::CallbackInfo& info) {
 	JS_GLENUM_ARG(0, face);
 	JS_GLENUM_ARG(1, pname);
 	JS_GLFLOAT_ARG(2, param);
-	glTranslatef(face, pname, param);
+	glMaterialf(face, pname, param);
   return env.Undefined();
 }
 
@@ -1926,7 +1939,10 @@ Napi::Value selectBuffer(const Napi::CallbackInfo& info) {
 // function shadeModel(mode:GLenum ): void;
 Napi::Value shadeModel(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(shadeModel);
+  JS_ARGS(1);
+	JS_ARG_TYPE(0, Number);
+  JS_GLENUM_ARG(0, mode);
+  glShadeModel(mode);
   return env.Undefined();
 }
 
