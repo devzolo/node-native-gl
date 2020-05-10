@@ -13,7 +13,6 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 
-
 #include <map>
 
 #define JS_GL___________________________TODO(name) puts("TODO: GL."#name)
@@ -43,6 +42,7 @@ if (info.Length() < argc) { \
 #define JS_GLCLAMPF_ARG(pos, name) GLclampf name = info[pos].As<Napi::Number>().FloatValue();
 #define JS_GLCLAMPD_ARG(pos, name) GLclampd name = info[pos].As<Napi::Number>().DoubleValue();
 #define JS_GLSIZEI_ARG(pos, name) GLsizei name = info[pos].As<Napi::Number>().Int32Value();
+#define JS_GLSIZEIPTR_ARG(pos, name) GLsizeiptr name = info[pos].As<Napi::Number>().Int64Value();
 
 #define JS_ARG_TYPE(pos, type)  if (!info[pos].Is##type()) { \
   Napi::TypeError::New(env, "Wrong arguments").ThrowAsJavaScriptException(); \
@@ -564,7 +564,14 @@ Napi::Value disableClientState(const Napi::CallbackInfo& info) {
 // function drawArrays(mode:GLenum , first: GLint , count: GLsizei ): void;
 Napi::Value drawArrays(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(drawArrays);
+
+  JS_ARGS(0);
+  JS_GLENUM_ARG(0, mode);
+  JS_GLINT_ARG(1, first);
+  JS_GLSIZEI_ARG(2, count);
+
+  glDrawArrays(mode, first, count);
+
   return env.Undefined();
 }
 
@@ -3260,14 +3267,25 @@ Napi::Value beginQuery(const Napi::CallbackInfo& info) {
 // function bindBuffer(target:GLenum , buffer:GLuint ): void;
 Napi::Value bindBuffer(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(bindBuffer);
+  JS_ARGS(2);
+  JS_GLENUM_ARG(0, target);
+  JS_GLUINT_ARG(1, buffer);
+  glBindBuffer(target, buffer);
   return env.Undefined();
 }
 
 // function bufferData(target:GLenum , size:GLsizeiptr , data:[], usage:GLenum ): void;
 Napi::Value bufferData(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(bufferData);
+
+  JS_ARGS(4);
+  JS_GLENUM_ARG(0, target);
+  JS_GLSIZEIPTR_ARG(1, size);
+	GLfloat* data = info[2].As<Napi::Float32Array>().Data();
+  JS_GLENUM_ARG(3, usage);
+
+  glBufferData(target, size, data, usage);
+
   return env.Undefined();
 }
 
@@ -3299,12 +3317,46 @@ Napi::Value endQuery(const Napi::CallbackInfo& info) {
   return env.Undefined();
 }
 
-// function genBuffers(n:GLsizei , buffers: GLuint[]): void;
+// function genBuffers(n:GLsizei): void;
 Napi::Value genBuffers(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(genBuffers);
+
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLSIZEI_ARG(0, id);
+
+  GLuint vertexArrayID;
+	glGenBuffers(id, &vertexArrayID);
+  
+  return Napi::Number::New(env, vertexArrayID);
+}
+
+// function genVertexArrays(n:GLsizei): void;
+Napi::Value genVertexArrays(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLUINT_ARG(0, id);
+
+  GLuint vertexArrayID;
+	glGenVertexArrays(id, &vertexArrayID);
+  
+  return Napi::Number::New(env, vertexArrayID);
+}
+
+// function bindVertexArray(n:GLsizei): void;
+Napi::Value bindVertexArray(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLUINT_ARG(0, id);
+	glBindVertexArray(id);
+  
   return env.Undefined();
 }
+
 
 // function genQueries(n:GLsizei , ids: GLuint[]): void;
 Napi::Value genQueries(const Napi::CallbackInfo& info) {
@@ -3460,7 +3512,11 @@ Napi::Value detachShader(const Napi::CallbackInfo& info) {
 // function disableVertexAttribArray(index:GLuint ): void;
 Napi::Value disableVertexAttribArray(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(disableVertexAttribArray);
+
+  JS_ARGS(1);
+  JS_GLUINT_ARG(0, index);
+
+  glDisableVertexAttribArray(index);
   return env.Undefined();
 }
 
@@ -3474,7 +3530,13 @@ Napi::Value drawBuffers(const Napi::CallbackInfo& info) {
 // function enableVertexAttribArray(index:GLuint ): void;
 Napi::Value enableVertexAttribArray(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(enableVertexAttribArray);
+
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLUINT_ARG(0, index);
+
+  glEnableVertexAttribArray(index);
+
   return env.Undefined();
 }
 
@@ -3816,7 +3878,16 @@ Napi::Value uniformMatrix3fv(const Napi::CallbackInfo& info) {
 // function uniformMatrix4fv(location:GLint , count:GLsizei , transpose:GLboolean , value:GLfloat[]): void;
 Napi::Value uniformMatrix4fv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(uniformMatrix4fv);
+  JS_ARGS(4);
+	JS_ARG_TYPE(0, Number);
+	JS_ARG_TYPE(1, Number);
+	JS_ARG_TYPE(2, Number);
+	JS_GLINT_ARG(0, location);
+	JS_GLINT_ARG(1, count);
+	JS_GLINT_ARG(2, transpose);
+	GLfloat* params = info[3].As<Napi::External<float>>().Data();
+
+  glUniformMatrix4fv(location, count, transpose, params);
   return env.Undefined();
 }
 
@@ -4092,7 +4163,17 @@ Napi::Value vertexAttrib4usv(const Napi::CallbackInfo& info) {
 // function vertexAttribPointer(index:GLuint ,size:GLint, type:GLenum , normalized:GLboolean , stride:GLsizei , pointer:[]): void;
 Napi::Value vertexAttribPointer(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(vertexAttribPointer);
+
+  JS_ARGS(5);
+
+  JS_GLUINT_ARG(0, index);
+  JS_GLINT_ARG(1, size);
+  JS_GLENUM_ARG(2, type);
+  JS_GLINT_ARG(3, normalized);
+  JS_GLSIZEI_ARG(4, stride);
+
+  glVertexAttribPointer(index, size, type, normalized, stride, (void*)0);
+
   return env.Undefined();
 }
 
@@ -5963,6 +6044,9 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   JS_GL_CONSTANT(VIEW_CLASS_BPTC_UNORM);
   JS_GL_CONSTANT(VIEW_CLASS_BPTC_FLOAT);
 
+  JS_GL_CONSTANT(ARRAY_BUFFER);
+  JS_GL_CONSTANT(STATIC_DRAW);
+
   // METHODS
   JS_GL_SET_METHOD(init);
   JS_GL_SET_METHOD(accum);
@@ -6417,6 +6501,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   JS_GL_SET_METHOD(deleteQueries);
   JS_GL_SET_METHOD(endQuery);
   JS_GL_SET_METHOD(genBuffers);
+  JS_GL_SET_METHOD(genVertexArrays);
+  JS_GL_SET_METHOD(bindVertexArray);
   JS_GL_SET_METHOD(genQueries);
   JS_GL_SET_METHOD(getBufferParameteriv);
   JS_GL_SET_METHOD(getBufferPointerv);
