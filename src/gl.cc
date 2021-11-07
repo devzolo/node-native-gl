@@ -908,8 +908,9 @@ Napi::Value genLists(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   JS_ARGS(1);
   JS_ARG_TYPE(0, Number);
-  GLsizei range = info[0].As<Napi::Number>().Int32Value();
-  return env.Undefined();
+  JS_GLSIZEI_ARG(0, range);
+  GLuint ret = glGenLists(range);
+  return Napi::Number::New(env, ret);
 }
 
 // function genTextures(n: GLsizei , textures: GLuint[] ): void;
