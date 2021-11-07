@@ -2,9 +2,12 @@
   "name": "native-gl",
   "version": "1.0.0",
   "main": "dist",
-  "repository": "https://github.com/devzolo/node-native-gl.git",
   "author": "Raphael-ZoLo <zolotorevsky@gmail.com>",
   "license": "MIT",
+  "repository": "https://github.com/devzolo/node-native-gl",
+  "publishConfig": {
+    "@devzolo:registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "@types/node": "^13.7.4",

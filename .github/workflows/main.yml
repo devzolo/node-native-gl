@@ -1,0 +1,26 @@
+name: Node.js Package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  publish-gpr:
+    #needs: build
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+          #cache: 'yarn'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@devzolo'
+      - run: npm install
+      #- run: yarn test
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

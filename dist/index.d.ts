@@ -1280,6 +1280,9 @@ declare module 'native-gl' {
     const VIEW_CLASS_BPTC_UNORM = 0x82D2;
     const VIEW_CLASS_BPTC_FLOAT = 0x82D3;
 
+    const ARRAY_BUFFER = 0x8892;
+    const STATIC_DRAW = 0x88E4;
+
     /*************************************************************/
     type GLdouble = number;
     type GLclampd = number;
@@ -1745,7 +1748,10 @@ declare module 'native-gl' {
     function deleteBuffers(n:GLsizei , buffers: GLuint[]): void;
     function deleteQueries(n:GLsizei , ids: GLuint[]): void;
     function endQuery(target:GLenum ): void;
-    function genBuffers(n:GLsizei , buffers: GLuint[]): void;
+    function genBuffers(n:GLsizei): number;
+    function genVertexArrays(n:GLsizei): number;
+    function bindVertexArray(n:GLsizei): void;
+    function bufferData(target:GLenum , size:GLsizeiptr , data:any, usage:GLenum ): void;
     function genQueries(n:GLsizei , ids: GLuint[]): void;
     function getBufferParameteriv(target:GLenum , pname:GLenum , params: GLint[]): void;
     function getBufferPointerv(target:GLenum , pname:GLenum , params:void[]): void;
@@ -1852,7 +1858,7 @@ declare module 'native-gl' {
     function vertexAttrib4ubv(index:GLuint , v:GLubyte[]): void;
     function vertexAttrib4uiv(index:GLuint , v: GLuint[]): void;
     function vertexAttrib4usv(index:GLuint , v:GLushort[]): void;
-    function vertexAttribPointer(index:GLuint ,size:GLint, type:GLenum , normalized:GLboolean , stride:GLsizei , pointer:[]): void;
+    function vertexAttribPointer(index:GLuint ,size:GLint, type:GLenum , normalized:GLboolean , stride:GLsizei): void;
 
     // GL_VERSION_2_1
     function uniformMatrix2x3fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
