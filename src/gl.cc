@@ -3327,7 +3327,7 @@ Napi::Value genBuffers(const Napi::CallbackInfo& info) {
 
   GLuint vertexArrayID;
 	glGenBuffers(id, &vertexArrayID);
-  
+
   return Napi::Number::New(env, vertexArrayID);
 }
 
@@ -3341,7 +3341,7 @@ Napi::Value genVertexArrays(const Napi::CallbackInfo& info) {
 
   GLuint vertexArrayID;
 	glGenVertexArrays(id, &vertexArrayID);
-  
+
   return Napi::Number::New(env, vertexArrayID);
 }
 
@@ -3353,7 +3353,7 @@ Napi::Value bindVertexArray(const Napi::CallbackInfo& info) {
   JS_ARG_TYPE(0, Number);
   JS_GLUINT_ARG(0, id);
 	glBindVertexArray(id);
-  
+
   return env.Undefined();
 }
 
