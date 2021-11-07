@@ -17,6 +17,7 @@
   },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
+    "postinstall": "tsc",
     "build": "node-pre-gyp install --build-from-source",
     "dist": "tsc",
     "package": "tsc&&node-pre-gyp install --build-from-source&&jest&&./node_modules/.bin/node-pre-gyp build package",
@@ -24,8 +25,8 @@
     "sources": "deps-source"
   },
   "dependencies": {
-    "node-addon-api": "^4.2.0",
-    "node-pre-gyp": "^0.17.0"
+    "@mapbox/node-pre-gyp": "^1.0.6",
+    "node-addon-api": "^4.2.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.16",
