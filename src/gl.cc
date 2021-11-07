@@ -906,7 +906,9 @@ Napi::Value frustum(const Napi::CallbackInfo& info) {
 // function genLists(range: GLsizei ): GLuint;
 Napi::Value genLists(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(genLists);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  GLsizei range = info[0].As<Napi::Number>().Int32Value();
   return env.Undefined();
 }
 
@@ -941,8 +943,8 @@ Napi::Value getDoublev(const Napi::CallbackInfo& info) {
 // function getError(): GLenum;
 Napi::Value getError(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(getError);
-  return env.Undefined();
+  JS_ARGS(0);
+  return Napi::Number::New(env, glGetError());
 }
 
 // function getFloatv(pname:GLenum ,params: GLfloat[]): void;
@@ -1046,8 +1048,10 @@ Napi::Value getPolygonStipple(const Napi::CallbackInfo& info) {
 // function getString(name:GLenum ): string;
 Napi::Value getString(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(getString);
-  return env.Undefined();
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  GLenum name = info[0].As<Napi::Number>().Int32Value();
+  return Napi::String::New(env, (char*)glGetString(name));
 }
 
 // function getTexEnvfv(target:GLenum , pname:GLenum ,params: GLfloat[]): void;
@@ -1434,14 +1438,40 @@ Napi::Value mapGrid1f(const Napi::CallbackInfo& info) {
 // function mapGrid2d(un: GLint , u1: GLdouble, u2: GLdouble, vn: GLint , v1: GLdouble, v2: GLdouble): void;
 Napi::Value mapGrid2d(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(mapGrid2d);
+  JS_ARGS(6);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_ARG_TYPE(4, Number);
+  JS_ARG_TYPE(5, Number);
+  JS_GLINT_ARG(0, un);
+  JS_GLDOUBLE_ARG(1, u1);
+  JS_GLDOUBLE_ARG(2, u2);
+  JS_GLINT_ARG(3, vn);
+  JS_GLDOUBLE_ARG(4, v1);
+  JS_GLDOUBLE_ARG(5, v2);
+  glMapGrid2d(un, u1, u2, vn, v1, v2);
   return env.Undefined();
 }
 
 // function mapGrid2f(un: GLint , u1: GLfloat, u2: GLfloat, vn: GLint , v1: GLfloat, v2: GLfloat): void;
 Napi::Value mapGrid2f(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(mapGrid2f);
+  JS_ARGS(6);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_ARG_TYPE(4, Number);
+  JS_ARG_TYPE(5, Number);
+  JS_GLINT_ARG(0, un);
+  JS_GLFLOAT_ARG(1, u1);
+  JS_GLFLOAT_ARG(2, u2);
+  JS_GLINT_ARG(3, vn);
+  JS_GLFLOAT_ARG(4, v1);
+  JS_GLFLOAT_ARG(5, v2);
+  glMapGrid2f(un, u1, u2, vn, v1, v2);
   return env.Undefined();
 }
 
@@ -4012,7 +4042,6 @@ Napi::Value uniformMatrix4fv(const Napi::CallbackInfo& info) {
 	JS_GLINT_ARG(1, count);
 	JS_GLINT_ARG(2, transpose);
 	GLfloat* params = info[3].As<Napi::External<float>>().Data();
-
   glUniformMatrix4fv(location, count, transpose, params);
   return env.Undefined();
 }
