@@ -9,20 +9,20 @@
     "@devzolo:registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.2",
-    "@types/node": "^13.7.4",
-    "@typescript-eslint/eslint-plugin": "^2.19.0",
-    "@typescript-eslint/parser": "^2.19.0",
-    "dotenv": "^8.2.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "jest": "^25.1.0",
-    "nodemon": "^2.0.2",
-    "prettier": "^1.19.1",
-    "ts-jest": "^25.2.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.7.5"
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.14",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
   },
   "binary": {
     "module_name": "native-gl",
@@ -42,7 +42,7 @@
     "start": "ts-node src"
   },
   "dependencies": {
-    "node-addon-api": "^2.0.0",
-    "node-pre-gyp": "^0.14.0"
+    "node-addon-api": "^4.2.0",
+    "node-pre-gyp": "^0.17.0"
   }
 }
