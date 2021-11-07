@@ -1,4 +1,4 @@
-declare module 'native-gl' {
+declare module '@devzolo/node-native-gl' {
   export namespace GL {
 
     /* AccumOp */
