@@ -2075,14 +2075,28 @@ Napi::Value rotatef(const Napi::CallbackInfo& info) {
 // function scaled(x: GLdouble , y: GLdouble , z: GLdouble ): void;
 Napi::Value scaled(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(scaled);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLFLOAT_ARG(0, x);
+  JS_GLFLOAT_ARG(1, y);
+  JS_GLFLOAT_ARG(2, z);
+  glScaled(x, y, z);
   return env.Undefined();
 }
 
 // function scalef(x:GLfloat , y: GLfloat, z: GLfloat): void;
 Napi::Value scalef(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(scalef);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLFLOAT_ARG(0, x);
+  JS_GLFLOAT_ARG(1, y);
+  JS_GLFLOAT_ARG(2, z);
+  glScalef(x, y, z);
   return env.Undefined();
 }
 
