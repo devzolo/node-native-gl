@@ -1,5 +1,5 @@
 {
-  "name": "node-native-gl",
+  "name": "@devzolo/node-native-gl",
   "version": "1.0.1",
   "main": "dist",
   "author": "Raphael-ZoLo <zolotorevsky@gmail.com>",
