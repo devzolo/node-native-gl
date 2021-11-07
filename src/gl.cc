@@ -33,16 +33,32 @@ if (info.Length() < argc) { \
 #define JS_DOUBLE_ARG(pos, name) double_t name = info[pos].As<Napi::Number>().DoubleValue();
 #define JS_FLOAT_ARG(pos, name) float_t name = info[pos].As<Napi::Number>().FloatValue();
 #define JS_PVOID_ARG(pos, name) void* name = (void*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_BOOL_ARG(pos, name) bool name = info[pos].As<Napi::Boolean>().Value();
+#define JS_ARRAY_ARG(pos, name) Napi::Array name = info[pos].As<Napi::Array>();
+#define JS_OBJECT_ARG(pos, name) Napi::Object name = info[pos].As<Napi::Object>();
 
+#define JS_GLBYTE_ARG(pos, name) GLbyte name = info[pos].As<Napi::Number>().Int32Value();
+#define JS_GLUBYTE_ARG(pos, name) GLubyte name = info[pos].As<Napi::Number>().Uint32Value();
 #define JS_GLDOUBLE_ARG(pos, name) GLdouble name = info[pos].As<Napi::Number>().DoubleValue();
 #define JS_GLFLOAT_ARG(pos, name) GLfloat name = info[pos].As<Napi::Number>().FloatValue();
 #define JS_GLENUM_ARG(pos, name) GLenum name = info[pos].As<Napi::Number>().Uint32Value();
 #define JS_GLUINT_ARG(pos, name) GLuint name = info[pos].As<Napi::Number>().Uint32Value();
+#define JS_GLSHORT_ARG(pos, name) GLshort name = info[pos].As<Napi::Number>().Int32Value();
+#define JS_GLUSHORT_ARG(pos, name) GLushort name = info[pos].As<Napi::Number>().Uint32Value();
 #define JS_GLINT_ARG(pos, name) GLint name = info[pos].As<Napi::Number>().Int32Value();
 #define JS_GLCLAMPF_ARG(pos, name) GLclampf name = info[pos].As<Napi::Number>().FloatValue();
 #define JS_GLCLAMPD_ARG(pos, name) GLclampd name = info[pos].As<Napi::Number>().DoubleValue();
 #define JS_GLSIZEI_ARG(pos, name) GLsizei name = info[pos].As<Napi::Number>().Int32Value();
 #define JS_GLSIZEIPTR_ARG(pos, name) GLsizeiptr name = info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLVOIDPTR_ARG(pos, name) void* name = (void*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLDOUBLEPTR_ARG(pos, name) GLdouble* name = (GLdouble*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLBYTEPTR_ARG(pos, name) GLbyte* name = (GLbyte*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLFLOATPTR_ARG(pos, name) GLfloat* name = (GLfloat*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLINTPTR_ARG(pos, name) GLint* name = (GLint*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLUINTPTR_ARG(pos, name) GLuint* name = (GLuint*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLENUMPTR_ARG(pos, name) GLenum* name = (GLenum*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLSHORTPTR_ARG(pos, name) GLshort* name = (GLshort*)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLUBYTEPTR_ARG(pos, name) GLubyte* name = (GLubyte*)info[pos].As<Napi::Number>().Int64Value();
 
 #define JS_ARG_TYPE(pos, type)  if (!info[pos].Is##type()) { \
   Napi::TypeError::New(env, "Wrong arguments").ThrowAsJavaScriptException(); \
@@ -90,7 +106,10 @@ Napi::Value areTexturesResident(const Napi::CallbackInfo& info) {
 // function arrayElement(i: GLint): void;
 Napi::Value arrayElement(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(arrayElement);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLINT_ARG(0, i);
+  glArrayElement(i);
   return env.Undefined();
 }
 
@@ -107,7 +126,12 @@ Napi::Value begin(const Napi::CallbackInfo& info) {
 // function bindTexture(target: GLenum, texture: GLuint): void;
 Napi::Value bindTexture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(bindTexture);
+  JS_ARGS(2);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_GLENUM_ARG(0, target);
+  JS_GLUINT_ARG(1, texture);
+  glBindTexture(target, texture);
   return env.Undefined();
 }
 
@@ -121,7 +145,12 @@ Napi::Value bitmap(const Napi::CallbackInfo& info) {
 // function blendFunc(sfactor: GLenum, dfactor: GLenum): void;
 Napi::Value blendFunc(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(blendFunc);
+  JS_ARGS(2);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_GLENUM_ARG(0, sfactor);
+  JS_GLENUM_ARG(1, dfactor);
+  glBlendFunc(sfactor, dfactor);
   return env.Undefined();
 }
 
@@ -138,7 +167,14 @@ Napi::Value callList(const Napi::CallbackInfo& info) {
 // function callLists(n: GLsizei, type: GLenum, lists: GLvoid[]): void;
 Napi::Value callLists(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(callLists);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Array);
+  JS_GLSIZEI_ARG(0, n);
+  JS_GLENUM_ARG(1, type);
+  JS_GLVOIDPTR_ARG(2, lists);
+  glCallLists(n, type, lists);
   return env.Undefined();
 }
 
@@ -155,7 +191,16 @@ Napi::Value clear(const Napi::CallbackInfo& info) {
 // function clearAccum(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat): void;
 Napi::Value clearAccum(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(clearAccum);
+  JS_ARGS(4);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_GLFLOAT_ARG(0, red);
+  JS_GLFLOAT_ARG(1, green);
+  JS_GLFLOAT_ARG(2, blue);
+  JS_GLFLOAT_ARG(3, alpha);
+  glClearAccum(red, green, blue, alpha);
   return env.Undefined();
 }
 
@@ -189,49 +234,80 @@ Napi::Value clearDepth(const Napi::CallbackInfo& info) {
 // function clearIndex(c: GLfloat): void;
 Napi::Value clearIndex(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(clearIndex);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLFLOAT_ARG(0, c);
+  glClearIndex(c);
   return env.Undefined();
 }
 
 // function clearStencil(s: GLint): void;
 Napi::Value clearStencil(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(clearStencil);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLINT_ARG(0, s);
+  glClearStencil(s);
   return env.Undefined();
 }
 
 // function clipPlane(plane: GLenum, equation: GLdouble[]): void;
 Napi::Value clipPlane(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(clipPlane);
+  JS_ARGS(2);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Array);
+  JS_GLENUM_ARG(0, plane);
+  JS_GLDOUBLEPTR_ARG(1, equation);
+  glClipPlane(plane, equation);
   return env.Undefined();
 }
 
 // function color3b(red: GLbyte, green: GLbyte, blue: GLbyte): void;
 Napi::Value color3b(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3b);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLBYTE_ARG(0, red);
+  JS_GLBYTE_ARG(1, green);
+  JS_GLBYTE_ARG(2, blue);
+  glColor3b(red, green, blue);
   return env.Undefined();
 }
 
 // function color3bv(v: GLbyte[]): void;
 Napi::Value color3bv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3bv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLBYTEPTR_ARG(0, v);
+  glColor3bv(v);
   return env.Undefined();
 }
 
 // function color3d(red: GLdouble, green: GLdouble, blue: GLdouble): void;
 Napi::Value color3d(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3d);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLDOUBLE_ARG(0, red);
+  JS_GLDOUBLE_ARG(1, green);
+  JS_GLDOUBLE_ARG(2, blue);
+  glColor3d(red, green, blue);
   return env.Undefined();
 }
 
 // function color3dv(v: GLdouble[]): void;
 Napi::Value color3dv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3dv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLDOUBLEPTR_ARG(0, v);
+  glColor3dv(v);
   return env.Undefined();
 }
 
@@ -252,49 +328,82 @@ Napi::Value color3f(const Napi::CallbackInfo& info) {
 // function color3fv(v: GLfloat[]): void;
 Napi::Value color3fv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3fv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLFLOATPTR_ARG(0, v);
+  glColor3fv(v);
   return env.Undefined();
 }
 
 // function color3i(red: GLint, green: GLint, blue: GLint): void;
 Napi::Value color3i(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3i);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLINT_ARG(0, red);
+  JS_GLINT_ARG(1, green);
+  JS_GLINT_ARG(2, blue);
+  glColor3i(red, green, blue);
   return env.Undefined();
 }
 
 // function color3iv(v: GLint[]): void;
 Napi::Value color3iv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3iv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLINTPTR_ARG(0, v);
+  glColor3iv(v);
   return env.Undefined();
 }
 
 // function color3s(red: GLshort, green: GLshort, blue: GLshort): void;
 Napi::Value color3s(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3s);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLSHORT_ARG(0, red);
+  JS_GLSHORT_ARG(1, green);
+  JS_GLSHORT_ARG(2, blue);
+  glColor3s(red, green, blue);
   return env.Undefined();
 }
 
 // function color3sv(v: GLshort): void;
 Napi::Value color3sv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3sv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLSHORTPTR_ARG(0, v);
+  glColor3sv(v);
   return env.Undefined();
 }
 
 // function color3ub(red: GLubyte, green: GLubyte, blue: GLubyte): void;
 Napi::Value color3ub(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3ub);
+  JS_ARGS(3);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_GLUBYTE_ARG(0, red);
+  JS_GLUBYTE_ARG(1, green);
+  JS_GLUBYTE_ARG(2, blue);
+  glColor3ub(red, green, blue);
   return env.Undefined();
 }
 
 // function color3ubv(v: GLubyte): void;
 Napi::Value color3ubv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color3ubv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLUBYTEPTR_ARG(0, v);
+  glColor3ubv(v);
   return env.Undefined();
 }
 
@@ -392,7 +501,10 @@ Napi::Value color4s(const Napi::CallbackInfo& info) {
 // function color4sv(v: GLshort): void;
 Napi::Value color4sv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color4sv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLSHORTPTR_ARG(0, v);
+  glColor4sv(v);
   return env.Undefined();
 }
 
@@ -1211,21 +1323,32 @@ Napi::Value lightiv(const Napi::CallbackInfo& info) {
 // function lineStipple(factor: GLint , pattern: GLushort): void;
 Napi::Value lineStipple(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(lineStipple);
+  JS_ARGS(2);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_GLINT_ARG(0, factor);
+  JS_GLUSHORT_ARG(1, pattern);
+  glLineStipple(factor, pattern);
   return env.Undefined();
 }
 
 // function lineWidth(width:GLfloat ): void;
 Napi::Value lineWidth(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(lineWidth);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLFLOAT_ARG(0, width);
+  glLineWidth(width);
   return env.Undefined();
 }
 
 // function listBase(base: GLuint ): void;
 Napi::Value listBase(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(listBase);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLUINT_ARG(0, base);
+  glListBase(base);
   return env.Undefined();
 }
 
@@ -1238,7 +1361,10 @@ Napi::Value loadIdentity(const Napi::CallbackInfo& info) {
 // function loadMatrixd(m: GLdouble[]): void;
 Napi::Value loadMatrixd(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(loadMatrixd);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, TypedArray);
+  GLdouble* m = info[0].As<Napi::Float64Array>().Data();
+  glLoadMatrixd(m);
   return env.Undefined();
 }
 

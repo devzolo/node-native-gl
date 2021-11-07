@@ -4,6 +4,8 @@
         "xlocale": "c",
         "list": "cpp",
         "xstring": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "chrono": "cpp",
+        "functional": "cpp"
     }
 }
