@@ -24,3 +24,20 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          path: 'release'
+          filename: 'release.zip'
+          target: 'release'
+          exclusions: 'node_modules/*'
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release.zip
+          asset_name: release.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is @devzolo/node-native-gl"
