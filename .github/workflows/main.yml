@@ -28,7 +28,7 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          path: 'release'
+          path: './'
           filename: 'release.zip'
           exclusions: '*.git* /*node_modules/* .editorconfig'
       - name: Upload binaries to release
