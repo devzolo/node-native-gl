@@ -21,6 +21,10 @@ jobs:
       - run: npm install
       #- run: yarn test
       - run: npm run build
+      - name: Delete Old Package
+        uses: actions/delete-package-versions@v1
+        with:
+          package-name: 'node-native-gl'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
