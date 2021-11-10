@@ -15,9 +15,9 @@
   "binary": {
     "module_name": "@devzolo/node-native-gl",
     "module_path": "./bin/{platform}/{arch}/native-gl.node",
-    "package_name": "{module_name}-{version}-npm.tar.gz",
+    "package_name": "release.zip",
     "host": "https://github.com",
-    "remote_path": "/devzolo/node-native-gl/releases/download/v{version}"
+    "remote_path": "/devzolo/node-native-gl/releases/download/main"
   },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
