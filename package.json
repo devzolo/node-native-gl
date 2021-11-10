@@ -15,7 +15,7 @@
   "binary": {
     "module_name": "native-gl.node",
     "module_path": "./bin/{platform}/{arch}/",
-    "package_name": "devzolo-node-native-gl-v1.0.0.tgz",
+    "package_name": "devzolo-node-native-gl-1.0.0.tgz",
     "host": "https://github.com",
     "remote_path": "/devzolo/node-native-gl/releases/download/main"
   },
