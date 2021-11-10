@@ -29,9 +29,9 @@ jobs:
         with:
           type: 'zip'
           path: 'release'
-          filename: 'release.zip'
+          output: 'release.zip'
           target: 'release'
-          exclusions: 'node_modules/*'
+          exclusions: '*.git* /*node_modules/* .editorconfig'
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
