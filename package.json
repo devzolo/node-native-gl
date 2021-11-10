@@ -15,12 +15,12 @@
   "binary": {
     "module_name": "native-gl.node",
     "module_path": "./bin/{platform}/{arch}/",
-    "package_name": "devzolo-node-native-gl-1.0.0.tgz",
     "host": "https://github.com",
-    "remote_path": "/devzolo/node-native-gl/releases/download/main"
+    "remote_path": "/devzolo/node-native-gl/releases/download/main",
+    "package_name": "devzolo-node-native-gl-1.0.0.tgz"
   },
   "scripts": {
-    "install": "node-pre-gyp install --fallback-to-build",
+    "install_old": "node-pre-gyp install --fallback-to-build",
     "prebuild": "rimraf ./dist",
     "build": "node-pre-gyp install --build-from-source",
     "postbuild": "tsc",
