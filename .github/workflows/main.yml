@@ -36,18 +36,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Archive Release
-        uses: thedoctor0/zip-release@master
-        with:
-          type: 'tar'
-          path: './'
-          filename: 'release.tar'
-          exclusions: '*.git* /*node_modules/* /*build/* .editorconfig'
+        run: npm pack
+      #   uses: thedoctor0/zip-release@master
+      #   with:
+      #     type: 'tar'
+      #     path: './'
+      #     filename: 'release.tar'
+      #     exclusions: '*.git* /*node_modules/* /*build/* .editorconfig'
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: release.tar
-          asset_name: release.tar
+          file: devzolo-node-native-gl-v1.0.0.tgz
+          asset_name: devzolo-node-native-gl-v1.0.0.tgz
           tag: ${{ github.ref }}
           overwrite: true
           body: "This is @devzolo/node-native-gl"
