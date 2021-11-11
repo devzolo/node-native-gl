@@ -466,21 +466,42 @@ Napi::Value color4dv(const Napi::CallbackInfo& info) {
 // function color4f(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat): void;
 Napi::Value color4f(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color4f);
+  JS_ARGS(4);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_GLFLOAT_ARG(0, red);
+  JS_GLFLOAT_ARG(1, green);
+  JS_GLFLOAT_ARG(2, blue);
+  JS_GLFLOAT_ARG(3, alpha);
+  glColor4f(red, green, blue, alpha);
   return env.Undefined();
 }
 
 // function color4fv(v: GLfloat[]): void;
 Napi::Value color4fv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color4fv);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Array);
+  JS_GLFLOATPTR_ARG(0, v);
+  glColor4fv(v);
   return env.Undefined();
 }
 
 // function color4i(red: GLint, green: GLint, blue: GLint, alpha: GLint): void;
 Napi::Value color4i(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color4i);
+  JS_ARGS(4);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_GLINT_ARG(0, red);
+  JS_GLINT_ARG(1, green);
+  JS_GLINT_ARG(2, blue);
+  JS_GLINT_ARG(3, alpha);
+  glColor4i(red, green, blue, alpha);
   return env.Undefined();
 }
 
@@ -494,7 +515,16 @@ Napi::Value color4iv(const Napi::CallbackInfo& info) {
 // function color4s(red: GLshort, green: GLshort, blue: GLshort, alpha: GLshort): void;
 Napi::Value color4s(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(color4s);
+  JS_ARGS(4);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_GLSHORT_ARG(0, red);
+  JS_GLSHORT_ARG(1, green);
+  JS_GLSHORT_ARG(2, blue);
+  JS_GLSHORT_ARG(3, alpha);
+  glColor4s(red, green, blue, alpha);
   return env.Undefined();
 }
 
@@ -579,7 +609,18 @@ Napi::Value colorPointer(const Napi::CallbackInfo& info) {
 // function copyPixels(x: GLint , y: GLint , width: GLsizei , height: GLsizei , type:GLenum ): void;
 Napi::Value copyPixels(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(copyPixels);
+  JS_ARGS(5);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_ARG_TYPE(4, Number);
+  JS_GLINT_ARG(0, x);
+  JS_GLINT_ARG(1, y);
+  JS_GLSIZEI_ARG(2, width);
+  JS_GLSIZEI_ARG(3, height);
+  JS_GLENUM_ARG(4, type);
+  glCopyPixels(x, y, width, height, type);
   return env.Undefined();
 }
 
