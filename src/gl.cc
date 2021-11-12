@@ -4944,10 +4944,16 @@ namespace gl
 
     JS_ARGS(5);
 
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_ARG_TYPE(2, Number);
+    JS_ARG_TYPE1_OR_TYPE2(3, Boolean, Number);
+    JS_ARG_TYPE(4, Number);
+
     JS_GLUINT_ARG(0, index);
     JS_GLINT_ARG(1, size);
     JS_GLENUM_ARG(2, type);
-    JS_GLINT_ARG(3, normalized);
+    GLboolean normalized = info[3].IsBoolean() ? info[3].As<Napi::Boolean>().Value() : info[3].As<Napi::Number>().Int32Value();
     JS_GLSIZEI_ARG(4, stride);
 
     glVertexAttribPointer(index, size, type, normalized, stride, (void *)0);
