@@ -24,7 +24,7 @@ jobs:
       - name: Delete Old Package
         uses: actions/delete-package-versions@v1
         with:
-          package-name: 'node-native-gl'
+          package-name: 'node-native-glm'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -47,8 +47,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: devzolo-node-native-gl-1.0.0.tgz
-          asset_name: devzolo-node-native-gl-1.0.0.tgz
+          file: devzolo-node-native-glm-1.0.0.tgz
+          asset_name: devzolo-node-native-glm-1.0.0.tgz
           tag: ${{ github.ref }}
           overwrite: true
-          body: "This is @devzolo/node-native-gl"
+          body: "This is @devzolo/node-native-glm"
