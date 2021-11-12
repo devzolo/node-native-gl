@@ -1295,7 +1295,7 @@ declare module '@devzolo/node-native-gl' {
     function init(): GLenum;
     function accum(op: GLenum, value: GLfloat): void;
     function alphaFunc(func: GLenum, ref: GLclampf): void;
-    function areTexturesResident(n: GLsizei , textures: GLuint[], residences: GLboolean[]): GLboolean;
+    function areTexturesResident(n: GLsizei , textures: GLuint[], residences: GLboolean | number[]): GLboolean | number;
     function arrayElement(i: GLint): void;
     function begin(mode: GLenum): void;
     function bindTexture(target: GLenum, texture: GLuint): void;
@@ -1342,7 +1342,7 @@ declare module '@devzolo/node-native-gl' {
     function color4uiv(v: GLuint[]): void;
     function color4us(red: GLushort, green: GLushort, blue: GLushort, alpha: GLushort): void;
     function color4usv(v: GLushort): void;
-    function colorMask(red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean): void;
+    function colorMask(red: GLboolean | number, green: GLboolean | number, blue: GLboolean | number, alpha: GLboolean | number): void;
     function colorMaterial(face:GLenum , mode:GLenum ): void;
     function colorPointer(size: GLint , type:GLenum , stride: GLsizei , pointer: []): void;
     function copyPixels(x: GLint , y: GLint , width: GLsizei , height: GLsizei , type:GLenum ): void;
@@ -1354,7 +1354,7 @@ declare module '@devzolo/node-native-gl' {
     function deleteLists(list: GLuint , range: GLsizei ): void;
     function deleteTextures(n: GLsizei , textures: GLuint[]): void;
     function depthFunc(func:GLenum ): void;
-    function depthMask(flag: GLboolean ): void;
+    function depthMask(flag: GLboolean | number ): void;
     function depthRange(zNear: GLclampd , zFar: GLclampd ): void;
     function disable(cap:GLenum ): void;
     function disableClientState(array:GLenum ): void;
@@ -1362,9 +1362,9 @@ declare module '@devzolo/node-native-gl' {
     function drawBuffer(mode:GLenum ): void;
     function drawElements(mode:GLenum , count: GLsizei , type:GLenum , indices: []): void;
     function drawPixels(width: GLsizei , height: GLsizei , format:GLenum , type:GLenum , pixels: []): void;
-    function edgeFlag(flag: GLboolean ): void;
+    function edgeFlag(flag: GLboolean | number ): void;
     function edgeFlagPointer(stride: GLsizei, pointer: GLvoid[]): void;
-    function edgeFlagv(flag: GLboolean): void;
+    function edgeFlagv(flag: GLboolean | number): void;
     function enable(cap: GLenum): void;
     function enableClientState(array: GLenum): void;
     function end(): void;
@@ -1392,7 +1392,7 @@ declare module '@devzolo/node-native-gl' {
     function frustum(left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble , zFar: GLdouble ): void;
     function genLists(range: GLsizei ): GLuint;
     function genTextures(n: GLsizei , textures: GLuint[] ): void;
-    function getBooleanv(pname:GLenum , params: GLboolean[]): void;
+    function getBooleanv(pname:GLenum , params: GLboolean | number[]): void;
     function getClipPlane(plane:GLenum , equation: GLdouble[]): void;
     function getDoublev(pname:GLenum , params: GLdouble[]): void;
     function getError(): GLenum;
@@ -1436,9 +1436,9 @@ declare module '@devzolo/node-native-gl' {
     function indexubv(c: GLubyte[]): void;
     function initNames(): void;
     function interleavedArrays(format:GLenum , stride: GLsizei , pointer: []): void;
-    function isEnabled(cap:GLenum ): GLboolean;
-    function isList(list: GLuint ): GLboolean;
-    function isTexture(texture: GLuint ): GLboolean;
+    function isEnabled(cap:GLenum ): GLboolean | number;
+    function isList(list: GLuint ): GLboolean | number;
+    function isTexture(texture: GLuint ): GLboolean | number;
     function lightModelf(pname:GLenum , param: GLfloat): void;
     function lightModelfv(pname:GLenum , params: GLfloat[]): void;
     function lightModeli(pname:GLenum , param: GLint ): void;
@@ -1633,7 +1633,7 @@ declare module '@devzolo/node-native-gl' {
     // GLEW
 
     //function init(): GLenum;
-    function isSupported(name: string): GLboolean;
+    function isSupported(name: string): GLboolean | number;
 
     // GL_VERSION_1_2
     function copyTexSubImage3D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint , x: GLint, y: GLint, width: GLsizei, height: GLsizei): void;
@@ -1689,7 +1689,7 @@ declare module '@devzolo/node-native-gl' {
     function multiTexCoord4iv(target:GLenum ,v:GLint[]): void;
     function multiTexCoord4s(target:GLenum , s:GLshort , t:GLshort , r:GLshort , q:GLshort ): void;
     function multiTexCoord4sv(target:GLenum ,v:GLshort[]): void;
-    function sampleCoverage(value:GLclampf, invert:GLboolean ): void;
+    function sampleCoverage(value:GLclampf, invert:GLboolean | number ): void;
 
     // GL_VERSION_1_4
     function blendColor(red:GLclampf, green:GLclampf, blue:GLclampf, alpha:GLclampf): void;
@@ -1759,10 +1759,10 @@ declare module '@devzolo/node-native-gl' {
     function getQueryObjectiv(id:GLuint , pname:GLenum , params: GLint[]): void;
     function getQueryObjectuiv(id:GLuint , pname:GLenum , params: GLuint[]): void;
     function getQueryiv(target:GLenum , pname:GLenum , params: GLint[]): void;
-    function isBuffer(buffer:GLuint ): GLboolean;
-    function isQuery(id:GLuint ): GLboolean;
+    function isBuffer(buffer:GLuint ): GLboolean | number;
+    function isQuery(id:GLuint ): GLboolean | number;
     function mapBuffer(target:GLenum , access:GLenum ): [];
-    function unmapBuffer(target:GLenum ): GLboolean;
+    function unmapBuffer(target:GLenum ): GLboolean | number;
 
     // GL_VERSION_2_0
     function attachShader(program:GLuint , shader:GLuint ): void;
@@ -1793,8 +1793,8 @@ declare module '@devzolo/node-native-gl' {
     function getVertexAttribdv(index:GLuint , pname:GLenum , params:GLdouble[]): void;
     function getVertexAttribfv(index:GLuint , pname:GLenum , params:GLfloat[]): void;
     function getVertexAttribiv(index:GLuint , pname:GLenum , params: GLint[]): void;
-    function isProgram(program:GLuint ): GLboolean;
-    function isShader(shader:GLuint ): GLboolean;
+    function isProgram(program:GLuint ): GLboolean | number;
+    function isShader(shader:GLuint ): GLboolean | number;
     function linkProgram(program:GLuint ): void;
     function shaderSource(shader:GLuint , src: string): void;
     //function shaderSource(shader:GLuint , count:GLsizei , src: string, length:GLint[]): void;
@@ -1817,9 +1817,9 @@ declare module '@devzolo/node-native-gl' {
     function uniform4fv(location:GLint , count:GLsizei , value:GLfloat[]): void;
     function uniform4i(location:GLint ,v0:GLint,v1:GLint,v2:GLint,v3:GLint): void;
     function uniform4iv(location:GLint , count:GLsizei , value:GLint[]): void;
-    function uniformMatrix2fv(location:GLint , count:GLsizei , transpose:GLboolean , value:GLfloat[]): void;
-    function uniformMatrix3fv(location:GLint , count:GLsizei , transpose:GLboolean , value:GLfloat[]): void;
-    function uniformMatrix4fv(location:GLint , count:GLsizei , transpose:GLboolean , value:GLfloat[]): void;
+    function uniformMatrix2fv(location:GLint , count:GLsizei , transpose:GLboolean | number , value:GLfloat[]): void;
+    function uniformMatrix3fv(location:GLint , count:GLsizei , transpose:GLboolean | number , value:GLfloat[]): void;
+    function uniformMatrix4fv(location:GLint , count:GLsizei , transpose:GLboolean | number , value:GLfloat[]): void;
     function useProgram(program:GLuint ): void;
     function validateProgram(program:GLuint ): void;
     function vertexAttrib1d(index:GLuint , x:GLdouble ): void;
@@ -1858,15 +1858,15 @@ declare module '@devzolo/node-native-gl' {
     function vertexAttrib4ubv(index:GLuint , v:GLubyte[]): void;
     function vertexAttrib4uiv(index:GLuint , v: GLuint[]): void;
     function vertexAttrib4usv(index:GLuint , v:GLushort[]): void;
-    function vertexAttribPointer(index:GLuint ,size:GLint, type:GLenum , normalized:GLboolean , stride:GLsizei): void;
+    function vertexAttribPointer(index:GLuint ,size:GLint, type:GLenum , normalized:GLboolean | number , stride:GLsizei): void;
 
     // GL_VERSION_2_1
-    function uniformMatrix2x3fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
-    function uniformMatrix2x4fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
-    function uniformMatrix3x2fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
-    function uniformMatrix3x4fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
-    function uniformMatrix4x2fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
-    function uniformMatrix4x3fv(location:GLint , count:GLsizei , transpose:GLboolean ,value:GLfloat[]): void;
+    function uniformMatrix2x3fv(location:GLint , count:GLsizei , transpose:GLboolean | number ,value:GLfloat[]): void;
+    function uniformMatrix2x4fv(location:GLint , count:GLsizei , transpose:GLboolean | number ,value:GLfloat[]): void;
+    function uniformMatrix3x2fv(location:GLint , count:GLsizei , transpose:GLboolean | number ,value:GLfloat[]): void;
+    function uniformMatrix3x4fv(location:GLint , count:GLsizei , transpose:GLboolean | number ,value:GLfloat[]): void;
+    function uniformMatrix4x2fv(location:GLint , count:GLsizei , transpose:GLboolean | number ,value:GLfloat[]): void;
+    function uniformMatrix4x3fv(location:GLint , count:GLsizei , transpose:GLboolean | number ,value:GLfloat[]): void;
 
     //GL_VERSION_3_0
     function beginConditionalRender(id:GLuint , mode:GLenum ): void;
@@ -1877,12 +1877,12 @@ declare module '@devzolo/node-native-gl' {
     function clearBufferfv(buffer:GLenum ,drawBuffer:GLint, value:GLfloat[]): void;
     function clearBufferiv(buffer:GLenum ,drawBuffer:GLint, value:GLint[]): void;
     function clearBufferuiv(buffer:GLenum ,drawBuffer:GLint, value: GLuint[]): void;
-    function colorMaski(buf:GLuint , red:GLboolean , green:GLboolean , blue:GLboolean , alpha:GLboolean ): void;
+    function colorMaski(buf:GLuint , red:GLboolean | number , green:GLboolean | number , blue:GLboolean | number , alpha:GLboolean | number ): void;
     function disablei(cap:GLenum , index:GLuint ): void;
     function enablei(cap:GLenum , index:GLuint ): void;
     function endConditionalRender(): void;
     function endTransformFeedback(): void;
-    function getBooleani_v(pname:GLenum , index:GLuint , data:GLboolean[]): void;
+    function getBooleani_v(pname:GLenum , index:GLuint , data:GLboolean | number[]): void;
     function getFragDataLocation(program:GLuint , name: string): GLint;
     function getStringi(name:GLenum , index:GLuint ): GLubyte[];
     function getTexParameterIiv(target:GLenum , pname:GLenum , params: GLint[]): void;
