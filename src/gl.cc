@@ -4621,9 +4621,9 @@ namespace gl
     JS_ARG_TYPE1_OR_TYPE2(2, Boolean, Number);
     JS_GLINT_ARG(0, location);
     JS_GLINT_ARG(1, count);
-    JS_GLINT_ARG(2, transpose);
+    GLboolean transpose = info[2].IsBoolean() ? info[2].As<Napi::Boolean>().Value() : info[2].As<Napi::Number>().Int32Value();
     GLfloat *params = info[3].As<Napi::External<float>>().Data();
-    glUniformMatrix4fv(location, count transpose ? 1 : 0, params);
+    glUniformMatrix4fv(location, count, transpose, params);
     return env.Undefined();
   }
 
