@@ -2535,7 +2535,12 @@ namespace gl
   Napi::Value texCoord2f(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(texCoord2f);
+    JS_ARGS(2);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_GLFLOAT_ARG(0, s);
+    JS_GLFLOAT_ARG(1, t);
+    glTexCoord2f(s, t);
     return env.Undefined();
   }
 
