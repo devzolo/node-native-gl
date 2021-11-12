@@ -65,6 +65,14 @@ if (info.Length() < argc) { \
   return env.Null(); \
 }
 
+#define JS_ARG_TYPE1_OR_TYPE2(pos, type1, type2)  if (!info[pos].Is##type1() && !info[pos].Is##type2()) { \
+  Napi::TypeError::New(env, "Wrong arguments").ThrowAsJavaScriptException(); \
+  return env.Null(); \
+}
+
+
+
+
 namespace gl {
 
 // function init(): GLenum;
@@ -4076,14 +4084,30 @@ Napi::Value uniform4iv(const Napi::CallbackInfo& info) {
 // function uniformMatrix2fv(location:GLint , count:GLsizei , transpose:GLboolean , value:GLfloat[]): void;
 Napi::Value uniformMatrix2fv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(uniformMatrix2fv);
+  JS_ARGS(4);
+	JS_ARG_TYPE(0, Number);
+	JS_ARG_TYPE(1, Number);
+	JS_ARG_TYPE1_OR_TYPE2(2, Boolean, Number);
+	JS_GLINT_ARG(0, location);
+	JS_GLINT_ARG(1, count);
+	JS_GLINT_ARG(2, transpose);
+	GLfloat* params = info[3].As<Napi::External<float>>().Data();
+  glUniformMatrix2fv(location, count, transpose, params);
   return env.Undefined();
 }
 
 // function uniformMatrix3fv(location:GLint , count:GLsizei , transpose:GLboolean , value:GLfloat[]): void;
 Napi::Value uniformMatrix3fv(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(uniformMatrix3fv);
+  JS_ARGS(4);
+	JS_ARG_TYPE(0, Number);
+	JS_ARG_TYPE(1, Number);
+	JS_ARG_TYPE1_OR_TYPE2(2, Boolean, Number);
+	JS_GLINT_ARG(0, location);
+	JS_GLINT_ARG(1, count);
+	JS_GLINT_ARG(2, transpose);
+	GLfloat* params = info[3].As<Napi::External<float>>().Data();
+  glUniformMatrix3fv(location, count, transpose, params);
   return env.Undefined();
 }
 
@@ -4093,7 +4117,7 @@ Napi::Value uniformMatrix4fv(const Napi::CallbackInfo& info) {
   JS_ARGS(4);
 	JS_ARG_TYPE(0, Number);
 	JS_ARG_TYPE(1, Number);
-	JS_ARG_TYPE(2, Number);
+	JS_ARG_TYPE1_OR_TYPE2(2, Boolean, Number);
 	JS_GLINT_ARG(0, location);
 	JS_GLINT_ARG(1, count);
 	JS_GLINT_ARG(2, transpose);
@@ -4115,7 +4139,10 @@ Napi::Value useProgram(const Napi::CallbackInfo& info) {
 // function validateProgram(program:GLuint ): void;
 Napi::Value validateProgram(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GL___________________________TODO(validateProgram);
+  JS_ARGS(1);
+  JS_ARG_TYPE(0, Number);
+  JS_GLUINT_ARG(0, program);
+  glValidateProgram(program);
   return env.Undefined();
 }
 
