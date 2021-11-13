@@ -60,6 +60,7 @@
 #define JS_GLENUMPTR_ARG(pos, name) GLenum *name = (GLenum *)info[pos].As<Napi::Number>().Int64Value();
 #define JS_GLSHORTPTR_ARG(pos, name) GLshort *name = (GLshort *)info[pos].As<Napi::Number>().Int64Value();
 #define JS_GLUBYTEPTR_ARG(pos, name) GLubyte *name = (GLubyte *)info[pos].As<Napi::Number>().Int64Value();
+#define JS_GLBITFIELD_ARG(pos, name) GLbitfield name = info[pos].As<Napi::Number>().Uint32Value();
 
 #define JS_ARG_TYPE(pos, type)                                                 \
   if (!info[pos].Is##type())                                                   \
@@ -1978,7 +1979,12 @@ namespace gl
   Napi::Value polygonMode(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(polygonMode);
+    JS_ARGS(2);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_GLENUM_ARG(0, face);
+    JS_GLENUM_ARG(1, mode);
+    glPolygonMode(face, mode);
     return env.Undefined();
   }
 
@@ -1986,7 +1992,12 @@ namespace gl
   Napi::Value polygonOffset(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(polygonOffset);
+    JS_ARGS(2);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_GLFLOAT_ARG(0, factor);
+    JS_GLFLOAT_ARG(1, units);
+    glPolygonOffset(factor, units);
     return env.Undefined();
   }
 
@@ -2038,7 +2049,10 @@ namespace gl
   Napi::Value pushAttrib(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(pushAttrib);
+    JS_ARGS(1);
+    JS_ARG_TYPE(0, Number);
+    JS_GLBITFIELD_ARG(0, mask);
+    glPushAttrib(mask);
     return env.Undefined();
   }
 
@@ -2046,7 +2060,10 @@ namespace gl
   Napi::Value pushClientAttrib(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(pushClientAttrib);
+    JS_ARGS(1);
+    JS_ARG_TYPE(0, Number);
+    JS_GLBITFIELD_ARG(0, mask);
+    glPushClientAttrib(mask);
     return env.Undefined();
   }
 
@@ -2061,7 +2078,10 @@ namespace gl
   Napi::Value pushName(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(pushName);
+    JS_ARGS(1);
+    JS_ARG_TYPE(0, Number);
+    JS_GLUINT_ARG(0, name);
+    glPushName(name);
     return env.Undefined();
   }
 
@@ -2069,7 +2089,12 @@ namespace gl
   Napi::Value rasterPos2d(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(rasterPos2d);
+    JS_ARGS(2);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_GLDOUBLE_ARG(0, x);
+    JS_GLDOUBLE_ARG(1, y);
+    glRasterPos2d(x, y);
     return env.Undefined();
   }
 
