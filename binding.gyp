@@ -46,19 +46,18 @@
             '<(module_root_dir)\\src\\types\\index.d.ts',
           ]
         },
-
-        # {
-        #   'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-gl\\bin\\<(platform)\\<(target_arch)',
-        #   'files': [
-        #     '<(module_root_dir)\\build\\Release\\native-gl.node',
-        #   ]
-        # },
-        # {
-        #   'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-gl\\dist',
-        #   'files': [
-        #     '<(module_root_dir)\\src\\types\\index.d.ts',
-        #   ]
-        # }
+        {
+          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-gl\\bin\\<(platform)\\<(target_arch)',
+          'files': [
+            '<(module_root_dir)\\build\\Release\\native-gl.node',
+          ]
+        },
+        {
+          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-gl\\dist',
+          'files': [
+            '<(module_root_dir)\\src\\types\\index.d.ts',
+          ]
+        }
       ]
     }
   ]

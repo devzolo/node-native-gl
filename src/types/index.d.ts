@@ -1283,6 +1283,8 @@ declare module '@devzolo/node-native-gl' {
     const ARRAY_BUFFER = 0x8892;
     const STATIC_DRAW = 0x88E4;
 
+    const CLAMP_TO_EDGE = 0x812F;
+
     /*************************************************************/
     type GLdouble = number;
     type GLclampd = number;
@@ -1391,7 +1393,7 @@ declare module '@devzolo/node-native-gl' {
     function frontFace(mode:GLenum ): void;
     function frustum(left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble , zFar: GLdouble ): void;
     function genLists(range: GLsizei ): GLuint;
-    function genTextures(n: GLsizei , textures: GLuint[] ): void;
+    function genTextures(n: GLsizei): GLuint[];
     function getBooleanv(pname:GLenum , params: GLboolean | number[]): void;
     function getClipPlane(plane:GLenum , equation: GLdouble[]): void;
     function getDoublev(pname:GLenum , params: GLdouble[]): void;

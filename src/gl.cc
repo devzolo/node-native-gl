@@ -61,6 +61,7 @@
 #define JS_GLSHORTPTR_ARG(pos, name) GLshort *name = (GLshort *)info[pos].As<Napi::Number>().Int64Value();
 #define JS_GLUBYTEPTR_ARG(pos, name) GLubyte *name = (GLubyte *)info[pos].As<Napi::Number>().Int64Value();
 #define JS_GLBITFIELD_ARG(pos, name) GLbitfield name = info[pos].As<Napi::Number>().Uint32Value();
+#define JS_THROW_ERR(msg) Napi::Error::New(env, msg).ThrowAsJavaScriptException();
 
 #define JS_ARG_TYPE(pos, type)                                                 \
   if (!info[pos].Is##type())                                                   \
@@ -1068,8 +1069,18 @@ namespace gl
   Napi::Value genTextures(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(genTextures);
-    return env.Undefined();
+    JS_ARGS(1)
+    JS_ARG_TYPE(0, Number);
+    JS_GLSIZEI_ARG(0, n);
+
+    Napi::Array arr = Napi::Array::New(env, n);
+    GLuint *textures = new GLuint[n];
+    glGenTextures(n, textures);
+    for (int i = 0; i < n; i++) {
+      arr.Set(i, Napi::Number::New(env, textures[i]));
+    }
+    delete[] textures;
+    return arr;
   }
 
   // function getBooleanv(pname:GLenum , params: GLboolean[]): void;
@@ -2837,7 +2848,45 @@ namespace gl
   Napi::Value texImage2D(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(texImage2D);
+    JS_ARGS(9);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_ARG_TYPE(2, Number);
+    JS_ARG_TYPE(3, Number);
+    JS_ARG_TYPE(4, Number);
+    JS_ARG_TYPE(5, Number);
+    JS_ARG_TYPE(6, Number);
+    JS_ARG_TYPE(7, Number);
+
+    JS_GLENUM_ARG(0, target);
+    JS_GLINT_ARG(1, level);
+    JS_GLINT_ARG(2, internalformat);
+    JS_GLINT_ARG(3, width);
+    JS_GLINT_ARG(4, height);
+    JS_GLINT_ARG(5, border);
+    JS_GLENUM_ARG(6, format);
+    JS_GLENUM_ARG(7, type);
+
+
+    //load a Buffer from node.js and convert to a slice of bytes
+    void* pixels = nullptr;
+    if (info[8].IsBuffer())
+    {
+      auto buffer = info[8].As<Napi::Buffer<char>>();
+      pixels = buffer.Data();
+    }
+    // else if (info[8].IsTypedArray())
+    // {
+    //   auto array = info[8].As<Napi::TypedArray>();
+    //   pixels = array.Data();
+    // }
+    else
+    {
+      JS_THROW_ERR("pixels must be a Buffer or TypedArray");
+    }
+
+    glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
+
     return env.Undefined();
   }
 
@@ -2845,7 +2894,16 @@ namespace gl
   Napi::Value texParameterf(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(texParameterf);
+    JS_ARGS(3);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_ARG_TYPE(2, Number);
+
+    JS_GLENUM_ARG(0, target);
+    JS_GLENUM_ARG(1, pname);
+    JS_GLFLOAT_ARG(2, param);
+
+    glTexParameterf(target, pname, param);
     return env.Undefined();
   }
 
@@ -2861,7 +2919,14 @@ namespace gl
   Napi::Value texParameteri(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(texParameteri);
+    JS_ARGS(3);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_ARG_TYPE(2, Number);
+    JS_GLENUM_ARG(0, target);
+    JS_GLENUM_ARG(1, pname);
+    JS_GLINT_ARG(2, param);
+    glTexParameteri(target, pname, param);
     return env.Undefined();
   }
 
@@ -6927,6 +6992,8 @@ namespace gl
 
     JS_GL_CONSTANT(ARRAY_BUFFER);
     JS_GL_CONSTANT(STATIC_DRAW);
+
+    JS_GL_CONSTANT(CLAMP_TO_EDGE);
 
     // METHODS
     JS_GL_SET_METHOD(init);
