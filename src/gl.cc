@@ -726,7 +726,10 @@ namespace gl
   Napi::Value cullFace(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(cullFace);
+    JS_ARGS(1);
+    JS_ARG_TYPE(0, Number);
+    JS_GLENUM_ARG(0, mode);
+    glCullFace(mode);
     return env.Undefined();
   }
 
@@ -1042,7 +1045,10 @@ namespace gl
   Napi::Value frontFace(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(frontFace);
+    JS_ARGS(1);
+    JS_ARG_TYPE(0, Number);
+    JS_GLENUM_ARG(0, mode);
+    glFrontFace(mode);
     return env.Undefined();
   }
 
