@@ -14,11 +14,15 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '18.x'
           #cache: 'yarn'
           registry-url: https://npm.pkg.github.com/
           scope: '@devzolo'
-      - run: pnpm install
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
       #- run: yarn test
       - run: pnpm run build
       - name: Delete Old Package
