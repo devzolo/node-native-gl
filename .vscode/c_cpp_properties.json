@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/node_modules/node-addon-api",
-                "${workspaceFolder}/node_modules/node-addon-api/external-napi"
+                "${workspaceFolder}/node_modules/node-addon-api/external-napi",
+                "C:/Users/devzolo/AppData/Local/node-gyp/Cache/18.16.1/include/node"
             ],
             "defines": [
                 "_DEBUG",

@@ -1,5 +1,7 @@
 module.exports = {
-  preset: 'ts-jest/presets/js-with-ts',
+  transform: {
+    "^.+\\.(t|j)sx?$": "@swc/jest",
+  },
   testEnvironment: 'node',
   verbose: true,
   moduleDirectories: ['node_modules', 'src'],

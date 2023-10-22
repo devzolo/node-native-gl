@@ -453,7 +453,14 @@ namespace gl
   Napi::Value color3ui(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(color3ui);
+    JS_ARGS(3);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_ARG_TYPE(2, Number);
+    JS_GLUINT_ARG(0, red);
+    JS_GLUINT_ARG(1, green);
+    JS_GLUINT_ARG(2, blue);
+    glColor3ui(red, green, blue);
     return env.Undefined();
   }
 
@@ -461,7 +468,10 @@ namespace gl
   Napi::Value color3uiv(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(color3uiv);
+    JS_ARGS(1);
+    JS_GLUINTPTR_ARG(0, v);
+    JS_ARG_TYPE(0, Array);
+    glColor3uiv(v);
     return env.Undefined();
   }
 
@@ -469,7 +479,14 @@ namespace gl
   Napi::Value color3us(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(color3us);
+    JS_ARGS(3);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_ARG_TYPE(2, Number);
+    JS_GLUSHORT_ARG(0, red);
+    JS_GLUSHORT_ARG(1, green);
+    JS_GLUSHORT_ARG(2, blue);
+    glColor3us(red, green, blue);
     return env.Undefined();
   }
 
@@ -791,7 +808,9 @@ namespace gl
   Napi::Value disableClientState(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(disableClientState);
+    JS_ARGS(1);
+    JS_GLENUM_ARG(0, array);
+    glDisableClientState(array);
     return env.Undefined();
   }
 

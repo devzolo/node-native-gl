@@ -1,21 +1,21 @@
 {
-    "files.associations": {
-        "system_error": "c",
-        "xlocale": "c",
-        "list": "cpp",
-        "xstring": "cpp",
-        "xutility": "cpp",
-        "chrono": "cpp",
-        "functional": "cpp",
-        "array": "cpp",
-        "compare": "cpp",
-        "memory": "cpp",
-        "ratio": "cpp",
-        "tuple": "cpp",
-        "type_traits": "cpp",
-        "utility": "cpp",
-        "xmemory": "cpp",
-        "xtr1common": "cpp",
-        "xiosbase": "cpp"
-    }
+  "files.associations": {
+    "system_error": "c",
+    "xlocale": "c",
+    "list": "cpp",
+    "xstring": "cpp",
+    "xutility": "cpp",
+    "chrono": "cpp",
+    "functional": "cpp",
+    "array": "cpp",
+    "compare": "cpp",
+    "memory": "cpp",
+    "ratio": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "utility": "cpp",
+    "xmemory": "cpp",
+    "xtr1common": "cpp",
+    "xiosbase": "cpp"
+  }
 }
