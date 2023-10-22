@@ -2,7 +2,7 @@
   "name": "@devzolo/node-native-gl",
   "version": "1.0.0",
   "main": "dist",
-  "author": "Raphael-ZoLo <contact@devzolo.com>",
+  "author": "devzolo <contact@devzolo.com>",
   "license": "MIT",
   "repository": "https://github.com/devzolo/node-native-gl",
   "publishConfig": {
