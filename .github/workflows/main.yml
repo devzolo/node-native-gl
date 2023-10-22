@@ -18,14 +18,14 @@ jobs:
           #cache: 'yarn'
           registry-url: https://npm.pkg.github.com/
           scope: '@devzolo'
-      - run: npm install
+      - run: pnpm install
       #- run: yarn test
-      - run: npm run build
+      - run: pnpm run build
       - name: Delete Old Package
         uses: actions/delete-package-versions@v1
         with:
           package-name: 'node-native-gl'
-      - run: npm publish
+      - run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       # - name: Delete Old Release
