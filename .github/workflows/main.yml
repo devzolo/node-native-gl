@@ -22,7 +22,7 @@ jobs:
         name: Install pnpm
         with:
           version: 8
-          run_install: false
+          run_install: true
       #- run: yarn test
       - run: pnpm run build
       - name: Delete Old Package
