@@ -25,7 +25,6 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
           run_install: true
       #- run: yarn test
       - run: pnpm run build
