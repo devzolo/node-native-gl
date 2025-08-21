@@ -29,34 +29,13 @@ jobs:
       #- run: yarn test
       - run: pnpm run build
       - name: Delete Old Package
-        uses: actions/delete-package-versions@v4
+        uses: actions/delete-package-versions@v5
+        continue-on-error: true
         with:
+          owner: devzolo
           package-name: '@devzolo/node-native-gl'
           package-type: 'npm'
+          token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      # - name: Delete Old Release
-      #   uses: dev-drprasad/delete-tag-and-release@v0.2.0
-      #   with:
-      #     delete_release: true
-      #     tag_name: main
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Archive Release
-      #   run: npm pack
-      #   uses: thedoctor0/zip-release@master
-      #   with:
-      #     type: 'tar'
-      #     path: './'
-      #     filename: 'release.tar'
-      #     exclusions: '*.git* /*node_modules/* /*build/* .editorconfig'
-      # - name: Upload binaries to release
-      #   uses: svenstaro/upload-release-action@v2
-      #   with:
-      #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #     file: devzolo-node-native-gl-1.0.0.tgz
-      #     asset_name: devzolo-node-native-gl-1.0.0.tgz
-      #     tag: ${{ github.ref }}
-      #     overwrite: true
-      #     body: "This is @devzolo/node-native-gl"
