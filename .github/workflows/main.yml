@@ -13,22 +13,29 @@ jobs:
     permissions:
       contents: read
       packages: write
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
           registry-url: https://npm.pkg.github.com
           scope: '@devzolo'
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          run_install: true
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
 
-      - run: pnpm run build
+      - name: Build
+        run: pnpm run build
 
       - name: Delete Old Package
         uses: actions/delete-package-versions@v5
@@ -37,6 +44,8 @@ jobs:
           owner: devzolo
           package-name: 'node-native-gl'
           package-type: 'npm'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Bump version (patch)
         run: pnpm version patch --no-git-tag-version
 
