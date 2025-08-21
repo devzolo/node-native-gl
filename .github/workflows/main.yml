@@ -9,16 +9,20 @@ on:
 jobs:
   publish-gpr:
     #needs: build
-    runs-on: windows-2019
+    runs-on: windows-2022
+    if: ${{ github.event_name == 'push' }}
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: 20
           #cache: 'yarn'
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://npm.pkg.github.com
           scope: '@devzolo'
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: 8
@@ -28,7 +32,7 @@ jobs:
       - name: Delete Old Package
         uses: actions/delete-package-versions@v4
         with:
-          package-name: 'node-native-gl'
+          package-name: '@devzolo/node-native-gl'
           package-type: 'npm'
       - run: pnpm publish
         env:
