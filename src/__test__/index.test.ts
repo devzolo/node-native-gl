@@ -1,7 +1,10 @@
-import GL from "..";
+import assert from "node:assert";
+import { describe, it } from "node:test";
 
-describe('GL Module Test', () => {
-  it ('VERSION_1_1 == 1', () => {
-    expect(GL.VERSION_1_1).toEqual(1)
-  })
+import GL from "../index.ts";
+
+describe("GL Module Test", () => {
+	it("VERSION_1_1 == 1", () => {
+		assert.strictEqual(GL.VERSION_1_1, 1);
+	});
 });

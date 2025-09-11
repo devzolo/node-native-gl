@@ -754,7 +754,12 @@ namespace gl
   Napi::Value deleteLists(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(deleteLists);
+    JS_ARGS(2);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Number);
+    JS_GLUINT_ARG(0, list);
+    JS_GLSIZEI_ARG(1, range);
+    glDeleteLists(list, range);
     return env.Undefined();
   }
 
@@ -762,7 +767,12 @@ namespace gl
   Napi::Value deleteTextures(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(deleteTextures);
+    JS_ARGS(2);
+    JS_ARG_TYPE(0, Number);
+    JS_ARG_TYPE(1, Array);
+    JS_GLSIZEI_ARG(0, n);
+    JS_GLUINTPTR_ARG(1, textures);
+    glDeleteTextures(n, textures);
     return env.Undefined();
   }
 
@@ -3282,7 +3292,10 @@ namespace gl
   Napi::Value activeTexture(const Napi::CallbackInfo &info)
   {
     Napi::Env env = info.Env();
-    JS_GL___________________________TODO(activeTexture);
+    JS_ARGS(1);
+    JS_ARG_TYPE(0, Number);
+    JS_GLENUM_ARG(0, texture);
+    glActiveTexture(texture);
     return env.Undefined();
   }
 
@@ -7679,6 +7692,42 @@ namespace gl
     JS_GL_SET_METHOD(multiDrawArraysIndirectCount);
     JS_GL_SET_METHOD(multiDrawElementsIndirectCount);
     JS_GL_SET_METHOD(specializeShader);
+
+
+    // GLEW
+    JS_GL_CONSTANT(TEXTURE0, 0x84C0);
+    JS_GL_CONSTANT(TEXTURE1, 0x84C1);
+    JS_GL_CONSTANT(TEXTURE2, 0x84C2);
+    JS_GL_CONSTANT(TEXTURE3, 0x84C3);
+    JS_GL_CONSTANT(TEXTURE4, 0x84C4);
+    JS_GL_CONSTANT(TEXTURE5, 0x84C5);
+    JS_GL_CONSTANT(TEXTURE6, 0x84C6);
+    JS_GL_CONSTANT(TEXTURE7, 0x84C7);
+    JS_GL_CONSTANT(TEXTURE8, 0x84C8);
+    JS_GL_CONSTANT(TEXTURE9, 0x84C9);
+    JS_GL_CONSTANT(TEXTURE10, 0x84CA);
+    JS_GL_CONSTANT(TEXTURE11, 0x84CB);
+    JS_GL_CONSTANT(TEXTURE12, 0x84CC);
+    JS_GL_CONSTANT(TEXTURE13, 0x84CD);
+    JS_GL_CONSTANT(TEXTURE14, 0x84CE);
+    JS_GL_CONSTANT(TEXTURE15, 0x84CF);
+    JS_GL_CONSTANT(TEXTURE16, 0x84D0);
+    JS_GL_CONSTANT(TEXTURE17, 0x84D1);
+    JS_GL_CONSTANT(TEXTURE18, 0x84D2);
+    JS_GL_CONSTANT(TEXTURE19, 0x84D3);
+    JS_GL_CONSTANT(TEXTURE20, 0x84D4);
+    JS_GL_CONSTANT(TEXTURE21, 0x84D5);
+    JS_GL_CONSTANT(TEXTURE22, 0x84D6);
+    JS_GL_CONSTANT(TEXTURE23, 0x84D7);
+    JS_GL_CONSTANT(TEXTURE24, 0x84D8);
+    JS_GL_CONSTANT(TEXTURE25, 0x84D9);
+    JS_GL_CONSTANT(TEXTURE26, 0x84DA);
+    JS_GL_CONSTANT(TEXTURE27, 0x84DB);
+    JS_GL_CONSTANT(TEXTURE28, 0x84DC);
+    JS_GL_CONSTANT(TEXTURE29, 0x84DD);
+    JS_GL_CONSTANT(TEXTURE30, 0x84DE);
+    JS_GL_CONSTANT(TEXTURE31, 0x84DF);
+
 
     return exports;
   }

@@ -1,56 +1,49 @@
 {
-  "name": "@devzolo/node-native-gl",
-  "version": "1.0.0",
-  "main": "dist",
-  "author": "devzolo <contact@devzolo.com>",
-  "license": "MIT",
-  "repository": "https://github.com/devzolo/node-native-gl",
-  "publishConfig": {
-    "@devzolo:registry": "https://npm.pkg.github.com"
-  },
-  "files": [
-    "dist",
-    "bin"
-  ],
-  "binary": {
-    "module_name": "native-gl.node",
-    "module_path": "./bin/{platform}/{arch}/",
-    "host": "https://github.com",
-    "remote_path": "/devzolo/node-native-gl/releases/download/main",
-    "package_name": "devzolo-node-native-gl-1.0.0.tgz"
-  },
-  "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "install_old": "node-pre-gyp install --fallback-to-build",
-    "prebuild": "rimraf ./dist",
-    "build": "node-pre-gyp install --build-from-source && tsc",
-    "dist": "tsc",
-    "package": "tsc&&node-pre-gyp install --build-from-source&&jest&&./node_modules/.bin/node-pre-gyp build package",
-    "test": "jest --coverage",
-    "sources": "deps-source"
-  },
-  "dependencies": {
-    "@mapbox/node-pre-gyp": "2.0.0",
-    "node-addon-api": "8.5.0"
-  },
-  "devDependencies": {
-    "@swc-node/register": "1.11.1",
-    "@swc/core": "1.13.3",
-    "@swc/helpers": "0.5.17",
-    "@swc/jest": "0.2.39",
-    "@types/jest": "30.0.0",
-    "@types/node": "24.3.0",
-    "@typescript-eslint/eslint-plugin": "8.39.1",
-    "@typescript-eslint/parser": "8.39.1",
-    "eslint": "9.22.0",
-    "eslint-config-prettier": "10.1.1",
-    "eslint-plugin-prettier": "5.2.3",
-    "jest": "30.0.5",
-    "prettier": "3.6.2",
-    "rimraf": "6.0.1",
-    "tar": "7.4.3",
-    "ts-jest": "29.4.1",
-    "typescript": "5.9.2"
-  },
-  "packageManager": "pnpm@8.9.2"
+	"name": "@devzolo/node-native-gl",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"type": "module",
+	"author": "devzolo <contact@devzolo.com>",
+	"license": "MIT",
+	"repository": "https://github.com/devzolo/node-native-gl",
+	"publishConfig": {
+		"@devzolo:registry": "https://npm.pkg.github.com"
+	},
+	"files": [
+		"dist",
+		"bin"
+	],
+	"binary": {
+		"module_name": "native-gl.node",
+		"module_path": "./bin/{platform}/{arch}/",
+		"host": "https://github.com",
+		"remote_path": "/devzolo/node-native-gl/releases/download/main",
+		"package_name": "devzolo-node-native-gl-1.0.0.tgz"
+	},
+	"scripts": {
+		"install_old": "node-pre-gyp install --fallback-to-build",
+		"prebuild": "rimraf ./dist",
+		"build": "node-pre-gyp install --build-from-source && tsc",
+		"dist": "tsc",
+		"package": "tsc&&node-pre-gyp install --build-from-source&&node --test&&./node_modules/.bin/node-pre-gyp build package",
+    "test": "node --test --experimental-transform-types --no-warnings",
+    "test:watch": "node --test --watch --experimental-transform-types --no-warnings",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+		"sources": "deps-source",
+		"format": "biome format",
+		"format:fix": "biome format --write",
+		"lint": "biome lint"
+	},
+	"dependencies": {
+		"@mapbox/node-pre-gyp": "^2.0.0",
+		"node-addon-api": "^8.5.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.2",
+		"@types/node": "^24.3.0",
+		"rimraf": "^6.0.1",
+		"tar": "^7.4.3",
+		"typescript": "^5.9.2"
+	},
+	"packageManager": "pnpm@8.9.2"
 }

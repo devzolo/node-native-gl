@@ -110,7 +110,7 @@ npm install && npm run build
 Other useful scripts:
 
 ```bash
-pnpm test        # run tests (Jest)
+pnpm test        # run tests
 pnpm dist        # compile TypeScript to ./dist
 pnpm package     # build addon + tests + package
 ```
