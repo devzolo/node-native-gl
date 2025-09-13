@@ -17,15 +17,26 @@
       'sources': [
         'src/gl.cc'
       ],
-      'defines' : ['GLEW_STATIC','NAPI_DISABLE_CPP_EXCEPTIONS','UNICODE'],
-      'libraries': ['opengl32', 'glew32s'],
+      'defines' : ['GLEW_STATIC','NAPI_DISABLE_CPP_EXCEPTIONS','GLEW_NO_GLU'],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")",
         '<(module_root_dir)/deps/glew-2.1.0/include'
       ],
       "conditions": [
-        ['OS=="win" and target_arch == "x64"', {
-          'library_dirs' : ['<(module_root_dir)/deps/glew-2.1.0/lib/Release/x64']
+        ['OS=="win"', {
+          'defines': ['UNICODE'],
+          'libraries': ['opengl32', 'glew32s'],
+          'conditions': [
+            ['target_arch == "x64"', {
+              'library_dirs' : ['<(module_root_dir)/deps/glew-2.1.0/lib/Release/x64']
+            }]
+          ]
+        }],
+        ['OS=="linux"', {
+          'libraries': ['-lGL', '-lGLEW']
+        }],
+        ['OS=="mac"', {
+          'libraries': ['-framework', 'OpenGL', '-lGLEW']
         }]
       ]
     },
@@ -35,27 +46,15 @@
       "dependencies" : [ "native-gl" ],
       "copies":[
         {
-          'destination': '<(module_root_dir)\\bin\\<(platform)\\<(target_arch)',
+          'destination': '<(module_root_dir)/bin/<(platform)/<(target_arch)',
           'files': [
-            '<(module_root_dir)\\build\\Release\\native-gl.node',
+            '<(module_root_dir)/build/Release/native-gl.node',
           ]
         },
         {
-          'destination': '<(module_root_dir)\\dist',
+          'destination': '<(module_root_dir)/dist',
           'files': [
-            '<(module_root_dir)\\src\\types\\index.d.ts',
-          ]
-        },
-        {
-          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-gl\\bin\\<(platform)\\<(target_arch)',
-          'files': [
-            '<(module_root_dir)\\build\\Release\\native-gl.node',
-          ]
-        },
-        {
-          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-gl\\dist',
-          'files': [
-            '<(module_root_dir)\\src\\types\\index.d.ts',
+            '<(module_root_dir)/src/types/index.d.ts',
           ]
         }
       ]

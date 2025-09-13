@@ -1,17 +1,36 @@
 #include <napi.h>
 
-#define WIN32_LEAN_AND_MEAN // Excluir itens raramente utilizados dos cabeçalhos do Windows
-// Arquivos de Cabeçalho do Windows
-#include <windows.h>
+// Cross-platform headers
+#ifdef _WIN32
+  #define WIN32_LEAN_AND_MEAN // Excluir itens raramente utilizados dos cabeçalhos do Windows
+  #include <windows.h>
+  #include <tchar.h>
+#else
+  #include <unistd.h>
+  #include <dlfcn.h>
+#endif
+
 // Arquivos de Cabeçalho C RunTime
 #include <stdlib.h>
-#include <malloc.h>
 #include <memory.h>
-#include <tchar.h>
+#ifdef _WIN32
+  #include <malloc.h>
+#else
+  #include <malloc.h>
+#endif
 
 // OpenGL Graphics Includes
+#ifndef GLEW_NO_GLU
+#define GLEW_NO_GLU
+#endif
 #include <GL/glew.h>
-#include <GL/gl.h>
+
+// Suppress specific warnings for Linux
+#ifdef __linux__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#endif
 
 #include <map>
 
@@ -7695,38 +7714,38 @@ namespace gl
 
 
     // GLEW
-    JS_GL_CONSTANT(TEXTURE0, 0x84C0);
-    JS_GL_CONSTANT(TEXTURE1, 0x84C1);
-    JS_GL_CONSTANT(TEXTURE2, 0x84C2);
-    JS_GL_CONSTANT(TEXTURE3, 0x84C3);
-    JS_GL_CONSTANT(TEXTURE4, 0x84C4);
-    JS_GL_CONSTANT(TEXTURE5, 0x84C5);
-    JS_GL_CONSTANT(TEXTURE6, 0x84C6);
-    JS_GL_CONSTANT(TEXTURE7, 0x84C7);
-    JS_GL_CONSTANT(TEXTURE8, 0x84C8);
-    JS_GL_CONSTANT(TEXTURE9, 0x84C9);
-    JS_GL_CONSTANT(TEXTURE10, 0x84CA);
-    JS_GL_CONSTANT(TEXTURE11, 0x84CB);
-    JS_GL_CONSTANT(TEXTURE12, 0x84CC);
-    JS_GL_CONSTANT(TEXTURE13, 0x84CD);
-    JS_GL_CONSTANT(TEXTURE14, 0x84CE);
-    JS_GL_CONSTANT(TEXTURE15, 0x84CF);
-    JS_GL_CONSTANT(TEXTURE16, 0x84D0);
-    JS_GL_CONSTANT(TEXTURE17, 0x84D1);
-    JS_GL_CONSTANT(TEXTURE18, 0x84D2);
-    JS_GL_CONSTANT(TEXTURE19, 0x84D3);
-    JS_GL_CONSTANT(TEXTURE20, 0x84D4);
-    JS_GL_CONSTANT(TEXTURE21, 0x84D5);
-    JS_GL_CONSTANT(TEXTURE22, 0x84D6);
-    JS_GL_CONSTANT(TEXTURE23, 0x84D7);
-    JS_GL_CONSTANT(TEXTURE24, 0x84D8);
-    JS_GL_CONSTANT(TEXTURE25, 0x84D9);
-    JS_GL_CONSTANT(TEXTURE26, 0x84DA);
-    JS_GL_CONSTANT(TEXTURE27, 0x84DB);
-    JS_GL_CONSTANT(TEXTURE28, 0x84DC);
-    JS_GL_CONSTANT(TEXTURE29, 0x84DD);
-    JS_GL_CONSTANT(TEXTURE30, 0x84DE);
-    JS_GL_CONSTANT(TEXTURE31, 0x84DF);
+    JS_GL_CONSTANT(TEXTURE0);
+    JS_GL_CONSTANT(TEXTURE1);
+    JS_GL_CONSTANT(TEXTURE2);
+    JS_GL_CONSTANT(TEXTURE3);
+    JS_GL_CONSTANT(TEXTURE4);
+    JS_GL_CONSTANT(TEXTURE5);
+    JS_GL_CONSTANT(TEXTURE6);
+    JS_GL_CONSTANT(TEXTURE7);
+    JS_GL_CONSTANT(TEXTURE8);
+    JS_GL_CONSTANT(TEXTURE9);
+    JS_GL_CONSTANT(TEXTURE10);
+    JS_GL_CONSTANT(TEXTURE11);
+    JS_GL_CONSTANT(TEXTURE12);
+    JS_GL_CONSTANT(TEXTURE13);
+    JS_GL_CONSTANT(TEXTURE14);
+    JS_GL_CONSTANT(TEXTURE15);
+    JS_GL_CONSTANT(TEXTURE16);
+    JS_GL_CONSTANT(TEXTURE17);
+    JS_GL_CONSTANT(TEXTURE18);
+    JS_GL_CONSTANT(TEXTURE19);
+    JS_GL_CONSTANT(TEXTURE20);
+    JS_GL_CONSTANT(TEXTURE21);
+    JS_GL_CONSTANT(TEXTURE22);
+    JS_GL_CONSTANT(TEXTURE23);
+    JS_GL_CONSTANT(TEXTURE24);
+    JS_GL_CONSTANT(TEXTURE25);
+    JS_GL_CONSTANT(TEXTURE26);
+    JS_GL_CONSTANT(TEXTURE27);
+    JS_GL_CONSTANT(TEXTURE28);
+    JS_GL_CONSTANT(TEXTURE29);
+    JS_GL_CONSTANT(TEXTURE30);
+    JS_GL_CONSTANT(TEXTURE31);
 
 
     return exports;
